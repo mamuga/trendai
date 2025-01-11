@@ -1,5 +1,5 @@
 import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
-import { AuthService } from './auth.service';
+import { AuthService } from './auth.service.js';
 import { LoginCredentials, ApiResponse, AuthResponse } from '@repo/shared';
 
 @Controller('auth')

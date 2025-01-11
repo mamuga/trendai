@@ -1,6 +1,6 @@
 import { Controller, Get, Param, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { CampaignService } from './campaign.service';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
+import { CampaignService } from './campaign.service.js';
 import { Campaign, ApiResponse } from '@repo/shared';
 
 @Controller('campaigns')

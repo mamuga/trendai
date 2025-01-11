@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { Role } from '../enums';
-import { type Influencer } from './influencer';
-import { type Brand } from './brand';
+import { Role } from '../enums/index.js';
+import { type Influencer} from "./influencer.js";
+import { type Brand } from './brand.js';
 
 // Base user schema
 export const userSchema = z.object({

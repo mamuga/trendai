@@ -6,9 +6,9 @@ import {
     Patch,
     Body,
 } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { Roles } from '../auth/decorators/role.decorator';
-import { BrandService } from './brand.service';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
+import { Roles } from '../auth/decorators/role.decorator.js';
+import { BrandService } from './brand.service.js';
 import { ApiResponse, Role, SubmissionStatus, Submission } from '@repo/shared';
 
 @Controller('brands')

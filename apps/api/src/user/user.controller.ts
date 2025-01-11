@@ -8,8 +8,8 @@ import {
     UseGuards,
     Request
 } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { UserService} from "./user.service";
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
+import { UserService} from "./user.service.js";
 import { CreateUser, UpdateUser, UserProfile, ApiResponse } from '@repo/shared';
 
 @Controller('users')

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { CampaignStatus } from '../enums';
+import { CampaignStatus} from "../enums/index.js";
 
 export const campaignSchema = z.object({
     id: z.string(),

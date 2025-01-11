@@ -6,13 +6,18 @@ import {
     Submission,
     UserProfile
 } from '@repo/shared';
-import { P } from '@repo/db';
+import { PrismaClient, Prisma } from '@repo/db';
+
+// Type aliases for Prisma model types
+type PrismaCampaign = Prisma.CampaignGetPayload<{}>;
+type PrismaSubmission = Prisma.SubmissionGetPayload<{}>;
+type PrismaUser = Prisma.UserGetPayload<{}>;
 
 export const convertPrismaRole = (role: any): Role => role as Role;
 export const convertPrismaCampaignStatus = (status: any): CampaignStatus => status as CampaignStatus;
 export const convertPrismaSubmissionStatus = (status: any): SubmissionStatus => status as SubmissionStatus;
 
-export const convertPrismaCampaign = (campaign: P.Campaign & { submissions?: any[] }): Campaign => ({
+export const convertPrismaCampaign = (campaign: PrismaCampaign & { submissions?: any[] }): Campaign => ({
     id: campaign.id,
     title: campaign.title,
     description: campaign.description,
@@ -26,7 +31,7 @@ export const convertPrismaCampaign = (campaign: P.Campaign & { submissions?: any
     submissionCount: campaign.submissions?.length || 0
 });
 
-export const convertPrismaSubmission = (submission: P.Submission): Submission => ({
+export const convertPrismaSubmission = (submission: PrismaSubmission): Submission => ({
     id: submission.id,
     campaignId: submission.campaignId,
     influencerId: submission.influencerId,
@@ -37,7 +42,7 @@ export const convertPrismaSubmission = (submission: P.Submission): Submission =>
     updatedAt: submission.updatedAt
 });
 
-export const convertPrismaUser = (user: P.User): UserProfile => ({
+export const convertPrismaUser = (user: PrismaUser): UserProfile => ({
     id: user.id,
     name: user.name,
     email: user.email,

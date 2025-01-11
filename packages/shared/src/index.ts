@@ -4,73 +4,79 @@ export type {
     UpdateUser,
     UserProfile,
     UserWithProfile,
-} from './types/user';
+} from './types/user.js';
 
 export type {
     LoginCredentials,
     AuthResponse
-} from './types/auth';
+} from './types/auth.js';
 
 // Main Entity Types
 export type {
     Campaign,
     CreateCampaign,
-} from './types/campaign';
+} from './types/campaign.js';
 
 export type {
     Submission,
     CreateSubmission,
-    ContentData,  // Add this for submission content
-    Metrics      // Add this for submission metrics
-} from './types/submission';
+    ContentData,
+    Metrics
+} from './types/submission.js';
 
 export type {
     Influencer,
-} from './types/influencer';
+} from './types/influencer.js';
 
 export type {
     Brand
-} from './types/brand';
+} from './types/brand.js';
 
 export type {
     ApiResponse
-} from './types/api';
+} from './types/api.js';
 
 // Schema Exports
 export {
     createUserSchema,
     updateUserSchema,
     userProfileSchema,
-} from './types/user';
+} from './types/user.js';
 
 export {
     loginCredentialsSchema,
     authResponseSchema
-} from './types/auth';
+} from './types/auth.js';
 
 export {
     campaignSchema,
     createCampaignSchema,
-} from './types/campaign';
+} from './types/campaign.js';
 
 export {
     submissionSchema,
     createSubmissionSchema,
-    contentDataSchema,  // Add this for content validation
-    metricsSchema      // Add this for metrics validation
-} from './types/submission';
+    contentDataSchema,
+    metricsSchema
+} from './types/submission.js';
 
 // Enum Exports
-export { Role, CampaignStatus, SubmissionStatus } from './enums';
+export { Role, CampaignStatus, SubmissionStatus } from './enums/index.js';
 
-export { mapSharedToPrismaStatus } from './utils/enum-mappers';
+export { mapSharedToPrismaStatus } from './utils/enum-mappers.js';
 
-export {convertPrismaSubmission} from './utils/covertPrismaSubmission'
+export { convertPrismaSubmission } from './utils/covertPrismaSubmission.js';
 
 export type Platform = 'TIKTOK' | 'INSTAGRAM';
 
-export { mapPlatformToPrisma, mapPrismaToPlatform } from './utils/mapPlatformToPrisma';
+export {
+    mapPlatformToPrisma,
+    mapPrismaToPlatform
+} from './utils/mapPlatformToPrisma.js';
 
-export { mapSharedToPrismaSubmissionStatus, mapPrismaToSharedSubmissionStatus } from './utils/enumMapping';
+export {
+    mapSharedToPrismaSubmissionStatus,
+    mapPrismaToSharedSubmissionStatus
+} from './utils/enumMapping.js';
 
 export { z } from 'zod';

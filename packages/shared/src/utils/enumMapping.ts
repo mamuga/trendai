@@ -1,10 +1,9 @@
-import { P } from '@repo/db';
-import { SubmissionStatus as SharedSubmissionStatus } from '../enums';
+import { SubmissionStatus } from '@repo/db';
 
-export function mapSharedToPrismaSubmissionStatus(status: SharedSubmissionStatus): P.SubmissionStatus {
-    return status as unknown as P.SubmissionStatus;
-}
+export const mapSharedToPrismaSubmissionStatus = (status: SubmissionStatus): SubmissionStatus => {
+    return status;
+};
 
-export function mapPrismaToSharedSubmissionStatus(status: P.SubmissionStatus): SharedSubmissionStatus {
-    return status as unknown as SharedSubmissionStatus;
-}
+export const mapPrismaToSharedSubmissionStatus = (status: SubmissionStatus): SubmissionStatus => {
+    return status;
+};

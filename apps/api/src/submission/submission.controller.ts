@@ -1,6 +1,6 @@
 import { Controller, Post, Patch, Body, Param, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { SubmissionService } from './submission.service';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
+import { SubmissionService } from './submission.service.js';
 import { CreateSubmission, Submission, ApiResponse } from '@repo/shared';
 
 @Controller('submissions')

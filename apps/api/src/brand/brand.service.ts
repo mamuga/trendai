@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service.js';
 import {
     mapPrismaToSharedSubmissionStatus,
     mapSharedToPrismaSubmissionStatus,
@@ -9,7 +9,7 @@ import {
     mapPrismaToPlatform,
     Platform
 } from '@repo/shared';
-import { P } from '@repo/db';
+
 
 @Injectable()
 export class BrandService {
@@ -45,19 +45,16 @@ export class BrandService {
             where: { id: submissionId },
             data: {
                 status: prismaStatus,
-                content: {
-                    platform: mapPlatformToPrisma(submission.content.platform as Platform),
-                    link: submission.content.link
-                }
+                content: submission.content
             },
         });
 
         return {
             ...updatedSubmission,
-            status: mapPrismaToSharedSubmissionStatus(updatedSubmission.status as P.SubmissionStatus),
+            status: mapPrismaToSharedSubmissionStatus(updatedSubmission.status),
             content: {
-                ...updatedSubmission.content,
-                platform: mapPrismaToPlatform(updatedSubmission.content.platform as Platform)
+                platform: mapPrismaToPlatform(updatedSubmission.content.platform as Platform),
+                link: updatedSubmission.content.link
             }
         };
     }

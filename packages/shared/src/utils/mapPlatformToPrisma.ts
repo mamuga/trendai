@@ -1,4 +1,4 @@
-import { Platform } from "..";
+import { Platform} from "../index.js";
 
 export function mapPlatformToPrisma(platform: Platform): string {
     return platform;

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { SubmissionStatus } from '../enums';
+import { SubmissionStatus} from "../enums/index.js";
 
 // These match the exports
 export const contentDataSchema = z.object({

@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service.js';
 import { CreateSubmission, Submission } from '@repo/shared';
-import { convertPrismaSubmission } from '../utils/type-converters';
+import { convertPrismaSubmission } from '../utils/type-converters.js';
 
 @Injectable()
 export class SubmissionService {

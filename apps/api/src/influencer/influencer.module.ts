@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { InfluencerController } from './influencer.controller';
-import { InfluencerService } from './influencer.service';
-import { PrismaModule } from "../prisma/prisma.module";
+import { InfluencerController } from './influencer.controller.js';
+import { InfluencerService } from './influencer.service.js';
+import { PrismaModule } from "../prisma/prisma.module.js";
 
 @Module({
   controllers: [InfluencerController],

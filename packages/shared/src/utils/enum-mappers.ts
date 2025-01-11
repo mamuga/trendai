@@ -1,15 +1,9 @@
-import { SubmissionStatus as SharedSubmissionStatus } from "../enums";
-import { P } from '@repo/db';
+import { CampaignStatus, SubmissionStatus } from '@repo/db';
 
-export const mapSharedToPrismaStatus = (sharedStatus: SharedSubmissionStatus): P.SubmissionStatus => {
-    switch (sharedStatus) {
-        case SharedSubmissionStatus.PENDING:
-            return P.SubmissionStatus.PENDING;
-        case SharedSubmissionStatus.APPROVED:
-            return P.SubmissionStatus.APPROVED;
-        case SharedSubmissionStatus.REJECTED:
-            return P.SubmissionStatus.REJECTED;
-        default:
-            throw new Error(`Unknown shared status: ${sharedStatus}`);
-    }
+export const mapSharedToPrismaStatus = (status: CampaignStatus): CampaignStatus => {
+    return status;
+};
+
+export const mapSharedToPrismaSubmissionStatus = (status: SubmissionStatus): SubmissionStatus => {
+    return status;
 };

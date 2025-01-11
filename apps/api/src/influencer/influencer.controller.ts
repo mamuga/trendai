@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Body, Param, UseGuards, Req } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { InfluencerService } from './influencer.service';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
+import { InfluencerService } from './influencer.service.js';
 import { Campaign, CreateSubmission, ApiResponse } from '@repo/shared';
-import { AuthenticatedRequest } from '../types/request';
-import { convertPrismaCampaign } from '../utils/type-converters';
+import { AuthenticatedRequest } from '../types/request.js';
+import { convertPrismaCampaign } from '../utils/type-converters.js';
 import { convertPrismaSubmission } from '@repo/shared' 
 
 @Controller('influencers')
