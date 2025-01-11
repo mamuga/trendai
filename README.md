@@ -16,8 +16,8 @@ TrendAI is a platform that connects brands with influencers for marketing campai
 
 ## Tech Stack
 
-- **Frontend**: Next.js 14, Tailwind CSS, shadcn/ui
-- **Backend**: NestJS, Prisma
+- **Frontend**: Next.js 15, Tailwind CSS, shadcn/ui
+- **Backend**: NestJS, Prisma ORM
 - **Database**: MongoDB
 - **Authentication**: JWT
 - **Monorepo**: Turborepo
