@@ -1,16 +1,22 @@
-export enum Role {
-    INFLUENCER = 'INFLUENCER',
-    BRAND = 'BRAND'
-}
+export const CampaignStatus = {
+    ACTIVE: 'ACTIVE',
+    COMPLETED: 'COMPLETED',
+    PENDING: 'PENDING'
+} as const;
 
-export enum CampaignStatus {
-    ACTIVE = 'ACTIVE',
-    COMPLETED = 'COMPLETED',
-    PENDING = 'PENDING'
-}
+export type CampaignStatus = typeof CampaignStatus[keyof typeof CampaignStatus];
 
-export enum SubmissionStatus {
-    PENDING = 'PENDING',
-    APPROVED = 'APPROVED',
-    REJECTED = 'REJECTED'
-}
+export const SubmissionStatus = {
+    PENDING: 'PENDING',
+    APPROVED: 'APPROVED',
+    REJECTED: 'REJECTED'
+} as const;
+
+export type SubmissionStatus = typeof SubmissionStatus[keyof typeof SubmissionStatus];
+
+export const Role = {
+    INFLUENCER: 'INFLUENCER',
+    BRAND: 'BRAND'
+  } as const;
+  
+export type Role = typeof Role[keyof typeof Role];

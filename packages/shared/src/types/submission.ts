@@ -1,15 +1,16 @@
 import { z } from 'zod';
 import { SubmissionStatus } from '../enums';
 
+// These match the exports
 export const contentDataSchema = z.object({
     platform: z.enum(['TIKTOK', 'INSTAGRAM']),
     link: z.string().url()
 });
 
 export const metricsSchema = z.object({
-    likes: z.number().nonnegative(),
-    shares: z.number().nonnegative(),
-    comments: z.number().nonnegative()
+    likes: z.number().min(0),
+    shares: z.number().min(0),
+    comments: z.number().min(0)
 });
 
 export const submissionSchema = z.object({
@@ -17,19 +18,21 @@ export const submissionSchema = z.object({
     campaignId: z.string(),
     influencerId: z.string(),
     content: contentDataSchema,
-    status: z.enum([SubmissionStatus.PENDING, SubmissionStatus.APPROVED, SubmissionStatus.REJECTED]),
+    status: z.nativeEnum(SubmissionStatus),
     metrics: metricsSchema.optional(),
     submittedAt: z.date(),
     updatedAt: z.date()
 });
 
-export const createSubmissionSchema = submissionSchema.omit({
-    id: true,
-    status: true,
-    metrics: true,
-    submittedAt: true,
-    updatedAt: true
+
+export const createSubmissionSchema = z.object({
+    campaignId: z.string(),
+    influencerId: z.string(), 
+    content: contentDataSchema
 });
 
+// Types that match the exports
+export type ContentData = z.infer<typeof contentDataSchema>;
+export type Metrics = z.infer<typeof metricsSchema>;
 export type Submission = z.infer<typeof submissionSchema>;
 export type CreateSubmission = z.infer<typeof createSubmissionSchema>;

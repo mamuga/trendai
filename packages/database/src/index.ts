@@ -1,1 +1,3 @@
-export * from '@prisma/client';
+import * as P from "@prisma/client"
+export { P }
+
