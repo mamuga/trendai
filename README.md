@@ -1,4 +1,3 @@
-```markdown
 # TrendAI - Influencer Campaign Management Platform
 
 ## Challenge Overview
@@ -52,15 +51,15 @@ trendai/
 │       │   └── enums/          # Shared enums
 │       └── package.json
 ```
-```
+
 
 ## Tech Stack
 
-Frontend: Next.js 15, TypeScript, Tailwind CSS, shadcn/ui
-Backend: NestJS, Prisma ORM
-Database: MongoDB
-Authentication: JWT
-Monorepo: Turborepo
+- Frontend: Next.js 15, TypeScript, Tailwind CSS, shadcn/ui
+- Backend: NestJS, Prisma ORM
+- Database: MongoDB
+- Authentication: JWT
+- Monorepo: Turborepo
 
 ## Quick Start
 
