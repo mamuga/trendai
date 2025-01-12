@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Campaign } from "@repo/shared"
+import { Campaign } from "@repo/db"
 import { SubmissionForm } from "@/components/campaigns/submission-form"
 import { 
   Card, 

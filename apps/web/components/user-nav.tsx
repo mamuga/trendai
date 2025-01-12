@@ -1,6 +1,6 @@
 "use client"
 
-import { User } from "@repo/shared"
+import { User } from "@repo/db"
 import { useRouter } from "next/navigation"
 import {
   DropdownMenu,

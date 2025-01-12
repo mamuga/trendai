@@ -1,6 +1,6 @@
 import { ApiResponse, LoginCredentials, AuthResponse } from "@repo/shared"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
 
 async function fetchApi<T>(
   endpoint: string, 

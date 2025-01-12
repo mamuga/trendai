@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { User } from "@repo/shared"
+import { User } from "@repo/db"
 import { api } from "@/lib/api"
 
 export function useAuth() {
