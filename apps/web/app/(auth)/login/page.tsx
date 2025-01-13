@@ -90,18 +90,9 @@ export default function LoginPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <Label htmlFor="password" className="text-white/90">
-                      Password
-                    </Label>
-                    <Button
-                        variant="link"
-                        className="px-0 text-white/60 hover:text-white"
-                        onClick={() => router.push('/forgot-password')}
-                    >
-                      Forgot password?
-                    </Button>
-                  </div>
+                  <Label htmlFor="password" className="text-white/90">
+                    Password
+                  </Label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-3 h-4 w-4 text-white/40" />
                     <Input
@@ -136,19 +127,6 @@ export default function LoginPage() {
                 </Button>
               </form>
             </CardContent>
-
-            <CardFooter>
-              <div className="w-full text-center text-white/60">
-                Don't have an account?{' '}
-                <Button
-                    variant="link"
-                    className="p-0 text-white hover:text-white/80"
-                    onClick={() => router.push('/register')}
-                >
-                  Sign up
-                </Button>
-              </div>
-            </CardFooter>
           </Card>
         </div>
       </div>

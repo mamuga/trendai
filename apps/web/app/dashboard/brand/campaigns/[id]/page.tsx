@@ -20,20 +20,18 @@ import {
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import {
-  Loader2,
   Users,
   Calendar,
   DollarSign,
   ExternalLink,
-  Clock
+  Clock,
 } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import Link from "next/link"
-import { api } from "@/lib/api"
 
-// Hardcoded data for testing
+// Mock data for testing
 const mockCampaign = {
-  id: "1",
+  id: "campaign-1",
   title: "Summer Fashion Campaign",
   description: "Promote our new summer collection",
   status: "ACTIVE",
@@ -41,7 +39,7 @@ const mockCampaign = {
   requirements: [
     "Post 3 Instagram stories",
     "1 TikTok video",
-    "Tag @brandname",
+    "Tag @brandname"
   ],
   deadline: new Date("2025-06-01").toISOString()
 }
@@ -50,13 +48,12 @@ const mockInfluencers = [
   {
     id: "inf1",
     user: {
-      name: "Sarah Smith",
+      name: "Sarah Lofa",
       email: "sarah@example.com",
     },
     submissions: [
       {
         id: "sub1",
-        status: "APPROVED",
         submittedAt: new Date("2024-01-10").toISOString()
       }
     ]
@@ -64,7 +61,7 @@ const mockInfluencers = [
   {
     id: "inf2",
     user: {
-      name: "John Doe",
+      name: "John Kiplimo",
       email: "john@example.com",
     },
     submissions: []
@@ -78,7 +75,6 @@ export default function CampaignDetailsPage({
 }) {
   const [campaign, setCampaign] = useState<Campaign | null>(mockCampaign)
   const [influencers, setInfluencers] = useState(mockInfluencers)
-  const [loading, setLoading] = useState(true)
   const { toast } = useToast()
 
   useEffect(() => {
@@ -92,23 +88,12 @@ export default function CampaignDetailsPage({
           title: "Error",
           description: "Failed to load campaign details."
         })
-      } finally {
-        setLoading(false)
       }
     }
 
-    // Comment out for testing with mock data
+    // Uncomment to use real API
     // fetchData()
-    setLoading(false)
   }, [params.id, toast])
-
-  if (loading) {
-    return (
-        <div className="flex h-96 items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-        </div>
-    )
-  }
 
   if (!campaign) return null
 
@@ -118,7 +103,7 @@ export default function CampaignDetailsPage({
   )
 
   return (
-      <div className="container py-8 space-y-8">
+      <div className="space-y-8">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
@@ -141,9 +126,7 @@ export default function CampaignDetailsPage({
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
                 <Users className="h-4 w-4 text-muted-foreground" />
-                <CardTitle className="text-sm font-medium">
-                  Total Influencers
-                </CardTitle>
+                <p className="text-sm font-medium">Total Influencers</p>
               </div>
               <p className="text-2xl font-bold mt-2">{influencers.length}</p>
             </CardContent>
@@ -153,9 +136,7 @@ export default function CampaignDetailsPage({
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
                 <ExternalLink className="h-4 w-4 text-muted-foreground" />
-                <CardTitle className="text-sm font-medium">
-                  Total Submissions
-                </CardTitle>
+                <p className="text-sm font-medium">Total Submissions</p>
               </div>
               <p className="text-2xl font-bold mt-2">{totalSubmissions}</p>
             </CardContent>
@@ -165,9 +146,7 @@ export default function CampaignDetailsPage({
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
                 <DollarSign className="h-4 w-4 text-muted-foreground" />
-                <CardTitle className="text-sm font-medium">
-                  Reward
-                </CardTitle>
+                <p className="text-sm font-medium">Reward</p>
               </div>
               <p className="text-2xl font-bold mt-2">${campaign.reward}</p>
             </CardContent>
@@ -177,9 +156,7 @@ export default function CampaignDetailsPage({
             <CardContent className="p-6">
               <div className="flex items-center space-x-2">
                 <Calendar className="h-4 w-4 text-muted-foreground" />
-                <CardTitle className="text-sm font-medium">
-                  Deadline
-                </CardTitle>
+                <p className="text-sm font-medium">Deadline</p>
               </div>
               <p className="text-2xl font-bold mt-2">
                 {new Date(campaign.deadline).toLocaleDateString()}
@@ -192,16 +169,12 @@ export default function CampaignDetailsPage({
         <Card>
           <CardHeader>
             <CardTitle>Campaign Requirements</CardTitle>
-            <CardDescription>
-              Guidelines for influencers to follow
-            </CardDescription>
+            <CardDescription>Guidelines for influencers to follow</CardDescription>
           </CardHeader>
           <CardContent>
             <ul className="list-disc list-inside space-y-2">
               {campaign.requirements.map((req, index) => (
-                  <li key={index} className="text-muted-foreground">
-                    {req}
-                  </li>
+                  <li key={index} className="text-muted-foreground">{req}</li>
               ))}
             </ul>
           </CardContent>
@@ -211,64 +184,54 @@ export default function CampaignDetailsPage({
         <Card>
           <CardHeader>
             <CardTitle>Campaign Influencers</CardTitle>
-            <CardDescription>
-              Overview of participating influencers
-            </CardDescription>
+            <CardDescription>Overview of participating influencers</CardDescription>
           </CardHeader>
           <CardContent>
-            {influencers.length === 0 ? (
-                <div className="text-center py-6 text-muted-foreground">
-                  No influencers have joined this campaign yet.
-                </div>
-            ) : (
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Influencer</TableHead>
-                      <TableHead>Submissions</TableHead>
-                      <TableHead>Latest Activity</TableHead>
-                      <TableHead className="text-right">Actions</TableHead>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Influencer</TableHead>
+                  <TableHead>Submissions</TableHead>
+                  <TableHead>Latest Activity</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {influencers.map((influencer) => (
+                    <TableRow key={influencer.id}>
+                      <TableCell className="font-medium">
+                        {influencer.user.name}
+                      </TableCell>
+                      <TableCell>{influencer.submissions.length}</TableCell>
+                      <TableCell>
+                        {influencer.submissions.length > 0 ? (
+                            <div className="flex items-center gap-2">
+                              <Clock className="h-4 w-4 text-muted-foreground" />
+                              {new Date(
+                                  influencer.submissions[0].submittedAt
+                              ).toLocaleDateString()}
+                            </div>
+                        ) : (
+                            <span className="text-muted-foreground">
+                        No submissions yet
+                      </span>
+                        )}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            asChild
+                        >
+                          <Link href={`/dashboard/brand/campaigns/${params.id}/submissions?influencer=${influencer.id}`}>
+                            View Submissions
+                          </Link>
+                        </Button>
+                      </TableCell>
                     </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {influencers.map((influencer) => (
-                        <TableRow key={influencer.id}>
-                          <TableCell className="font-medium">
-                            {influencer.user.name}
-                          </TableCell>
-                          <TableCell>
-                            {influencer.submissions.length}
-                          </TableCell>
-                          <TableCell>
-                            {influencer.submissions.length > 0 ? (
-                                <div className="flex items-center gap-2">
-                                  <Clock className="h-4 w-4 text-muted-foreground" />
-                                  {new Date(
-                                      influencer.submissions[0].submittedAt
-                                  ).toLocaleDateString()}
-                                </div>
-                            ) : (
-                                <span className="text-muted-foreground">
-                          No submissions yet
-                        </span>
-                            )}
-                          </TableCell>
-                          <TableCell className="text-right">
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                asChild
-                            >
-                              <Link href={`/dashboard/brand/campaigns/${params.id}/submissions?influencer=${influencer.id}`}>
-                                View Submissions
-                              </Link>
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-            )}
+                ))}
+              </TableBody>
+            </Table>
           </CardContent>
         </Card>
 
