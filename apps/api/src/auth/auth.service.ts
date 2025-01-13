@@ -5,6 +5,13 @@ import { Role } from '@repo/shared';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
+interface JwtPayload {
+    sub: string;        // userId (using 'sub' is a JWT convention)
+    email: string;
+    name: string;
+    role: Role;
+}
+
 @Injectable()
 export class AuthService {
     constructor(
@@ -21,7 +28,16 @@ export class AuthService {
             throw new UnauthorizedException('Invalid credentials');
         }
 
-        const token = this.jwtService.sign({ userId: user.id });
+        // Create JWT payload with necessary user information
+        const payload: JwtPayload = {
+            sub: user.id,          // userId as 'sub'
+            email: user.email,
+            name: user.name,
+            role: user.role as Role
+        };
+
+        // Generate token with complete payload
+        const token = this.jwtService.sign(payload);
 
         return {
             user: {

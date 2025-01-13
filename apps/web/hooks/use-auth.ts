@@ -1,33 +1,35 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { User } from "@repo/db"
-import { api } from "@/lib/api"
+import { useCallback } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
+import { useAuth} from "@/components/providers/auth-provider";
 
-export function useAuth() {
-  const [user, setUser] = useState<User | null>(null)
-  const [loading, setLoading] = useState(true)
+export function useAuthRedirect() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const { user } = useAuth()
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      const token = localStorage.getItem('token')
-      if (!token) {
-        setLoading(false)
+  const redirectToRoleBasedDashboard = useCallback(() => {
+    const callbackUrl = searchParams.get('callbackUrl')
+
+    if (callbackUrl) {
+      const isCorrectPath = user?.role === 'INFLUENCER'
+          ? callbackUrl.startsWith('/dashboard/influencer')
+          : callbackUrl.startsWith('/dashboard/brand')
+
+      if (isCorrectPath) {
+        router.push(callbackUrl)
         return
-      }
-
-      try {
-        const response = await api.auth.me()
-        setUser(response.data.user)
-      } catch (error) {
-        localStorage.removeItem('token')
-      } finally {
-        setLoading(false)
       }
     }
 
-    checkAuth()
-  }, [])
+    // Default redirects if no callback or wrong role path
+    if (user?.role === 'INFLUENCER') {
+      router.push('/dashboard/influencer/campaigns')
+    } else if (user?.role === 'BRAND') {
+      router.push('/dashboard/brand/campaigns')
+    }
+  }, [router, searchParams, user])
 
-  return { user, loading }
+  return { redirectToRoleBasedDashboard }
 }

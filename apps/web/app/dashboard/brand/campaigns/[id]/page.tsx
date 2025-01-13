@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Campaign, Submission } from "@repo/shared"
+import { Campaign } from "@repo/shared"
 import {
   Card,
   CardContent,
@@ -27,37 +27,64 @@ import {
   ExternalLink,
   Clock
 } from "lucide-react"
-import { useToast} from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast"
 import Link from "next/link"
 import { api } from "@/lib/api"
 
-interface Influencer {
-  id: string;
-  user: {
-    name: string;
-    email: string;
-  };
-  submissions: Submission[];
+// Hardcoded data for testing
+const mockCampaign = {
+  id: "1",
+  title: "Summer Fashion Campaign",
+  description: "Promote our new summer collection",
+  status: "ACTIVE",
+  reward: 500,
+  requirements: [
+    "Post 3 Instagram stories",
+    "1 TikTok video",
+    "Tag @brandname",
+  ],
+  deadline: new Date("2025-06-01").toISOString()
 }
+
+const mockInfluencers = [
+  {
+    id: "inf1",
+    user: {
+      name: "Sarah Smith",
+      email: "sarah@example.com",
+    },
+    submissions: [
+      {
+        id: "sub1",
+        status: "APPROVED",
+        submittedAt: new Date("2024-01-10").toISOString()
+      }
+    ]
+  },
+  {
+    id: "inf2",
+    user: {
+      name: "John Doe",
+      email: "john@example.com",
+    },
+    submissions: []
+  }
+]
 
 export default function CampaignDetailsPage({
                                               params,
                                             }: {
   params: { id: string }
 }) {
-  const [campaign, setCampaign] = useState<Campaign | null>(null)
-  const [influencers, setInfluencers] = useState<Influencer[]>([])
+  const [campaign, setCampaign] = useState<Campaign | null>(mockCampaign)
+  const [influencers, setInfluencers] = useState(mockInfluencers)
   const [loading, setLoading] = useState(true)
   const { toast } = useToast()
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const [campaignRes, influencersRes] = await Promise.all([
-          api.brand.getCampaign(params.id),
-          api.brand.getCampaignInfluencers(params.id)
-        ])
-        setCampaign(campaignRes.data)
+        const influencersRes = await api.brand.getCampaignInfluencers(params.id)
         setInfluencers(influencersRes.data)
       } catch (error) {
         toast({
@@ -70,7 +97,9 @@ export default function CampaignDetailsPage({
       }
     }
 
-    fetchData()
+    // Comment out for testing with mock data
+    // fetchData()
+    setLoading(false)
   }, [params.id, toast])
 
   if (loading) {
@@ -230,9 +259,7 @@ export default function CampaignDetailsPage({
                                 size="sm"
                                 asChild
                             >
-                              <Link
-                                  href={`/brand/campaigns/${params.id}/submissions?influencer=${influencer.id}`}
-                              >
+                              <Link href={`/dashboard/brand/campaigns/${params.id}/submissions?influencer=${influencer.id}`}>
                                 View Submissions
                               </Link>
                             </Button>
@@ -247,7 +274,7 @@ export default function CampaignDetailsPage({
 
         <div className="flex justify-end">
           <Button asChild>
-            <Link href={`/brand/campaigns/${params.id}/submissions`}>
+            <Link href={`/dashboard/brand/campaigns/${params.id}/submissions`}>
               Review All Submissions
             </Link>
           </Button>

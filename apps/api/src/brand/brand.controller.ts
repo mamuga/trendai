@@ -9,13 +9,14 @@ import {
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
 import { Roles } from '../auth/decorators/role.decorator.js';
 import { BrandService } from './brand.service.js';
-import { ApiResponse, Role, SubmissionStatus, Submission } from '@repo/shared';
+import { ApiResponse, Role, SubmissionStatus, Submission, Campaign } from '@repo/shared';
 
 @Controller('brands')
 @UseGuards(JwtAuthGuard)
 @Roles(Role.BRAND)
 export class BrandController {
     constructor(private readonly brandService: BrandService) {}
+
 
     @Get('campaigns/:campaignId/influencers')
     async getCampaignInfluencers(

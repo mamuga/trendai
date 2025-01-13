@@ -7,13 +7,14 @@ import {
     Submission,
     mapPlatformToPrisma,
     mapPrismaToPlatform,
-    Platform
+    Platform,
+    Campaign
 } from '@repo/shared';
-
 
 @Injectable()
 export class BrandService {
     constructor(private prisma: PrismaService) {}
+
 
     async getCampaignInfluencers(campaignId: string) {
         return this.prisma.campaignInfluencer.findMany({
